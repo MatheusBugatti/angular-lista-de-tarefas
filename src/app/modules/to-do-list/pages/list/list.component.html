@@ -3,21 +3,12 @@
 alt="Sua lista esta vazia, imagem ilustrativa"
 Loading= "eager"/>
 
-<button class="btn btn-primary">
+
+@if(addItem()){
+<button class="btn btn-primary" (click)="addItem.set(false)">
     Crie uma lista de tarefas
 </button>
-
-
-<div>
-    <label class="input-label-text" for="inputValue">
-        <input
-        type="text"
-        placeholder="Adicione um novo item"
-        id="inputValue"
-        autofocus
-        />
-
-        <button class="btn btn-primary" title="Adicionar um novo item"></button>
-    </label>
-</div>
+} @else {
+    <app-input-add-item></app-input-add-item>
+}
 </div>
