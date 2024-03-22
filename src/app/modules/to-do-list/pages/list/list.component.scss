@@ -7,6 +7,10 @@
     align-items: center;
     flex-direction: column;
 
+    .container{
+        min-width: 50%;
+    }
+
     div.container{
         display: flex;
         justify-content: center;
@@ -18,5 +22,35 @@
             margin-top: 30px;
             width: 100%;
         }
+    }
+    main.container {
+        height: calc(100dvh - 130px - 90px);
+
+        overflow: auto;
+
+        &::-webkit-scrollbar{
+            width: 4px;
+        }
+
+        //scroll
+        &::-webkit-scrollbar-track{
+            background: var(--black-010);
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background: var(--primary);
+            border-radius: 5px;
+        }
+    }
+
+    footer{
+        height: 90px;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-top: 2px solid var(--black-010);
     }
 }
