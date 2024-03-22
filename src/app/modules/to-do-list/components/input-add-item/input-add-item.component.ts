@@ -1,10 +1,12 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild, inject, output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject, input, output } from '@angular/core';
 import { IlistItems } from '../../interface/IListItems.interface';
+import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-input-add-item',
   standalone: true,
-  imports: [],
+  imports: [InputAddItemComponent, NgClass],
   templateUrl: './input-add-item.component.html',
   styleUrl: './input-add-item.component.scss'
 })
@@ -13,23 +15,24 @@ export class InputAddItemComponent {
 
   @ViewChild("inputText") public inputText!: ElementRef;
 
-  @Output() public outputListItems = new EventEmitter<IlistItems>()
+  @Input({required : true}) public inputListItems: IlistItems[] = []
+
+  @Output() public outputAddListItems = new EventEmitter<IlistItems>();
   public focusAndAddItem(value : string){
     if(value){
       //assim que detecta alteração faz alguma coisa
       this.#cdr.detectChanges();
       this.inputText.nativeElement.value = '';
 
-      const dataAtual= new Date();
-      const timestamp = dataAtual.getTime();
-      const id = `ID ${timestamp}`
+      const currentDate= new Date();
+      const timestamp = currentDate.getTime();
+      const id = `ID ${timestamp}`;
 
-      this.outputListItems.emit({
+      this.outputAddListItems.emit({
         id,
         checked: false,
         value
       });
-
 
       return this.inputText.nativeElement.focus();
     }
