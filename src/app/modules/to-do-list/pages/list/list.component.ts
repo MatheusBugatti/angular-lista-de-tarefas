@@ -109,11 +109,12 @@ throw new Error('Method not implemented.');
       confirmButtonText: "Sim, delete o item!"
       })
       .then((result) => {
-
-      this.#setListItems.update((oldValue: IlistItems[]) => {
+        if (result.isConfirmed){
+        this.#setListItems.update((oldValue: IlistItems[]) => {
         return oldValue.filter((res) => res.id !== id);
-    });
-   
+        
+      });
+    }
     return this.#updateLocalStorage();
     });
   }
@@ -132,10 +133,5 @@ throw new Error('Method not implemented.');
         return this.#setListItems.set(this.#parseItems());
       }
     });
-
-
-
-
-
   }
 }
